@@ -1,7 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
+    <TargetFrameworks>net10.0;netstandard2.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <IsAotCompatible Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">true</IsAotCompatible>
+    <VerifyReferenceAotCompatibility>true</VerifyReferenceAotCompatibility>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>14.0</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DocumentationFile>$(BinDir)\$(AssemblyName).xml</DocumentationFile>
     <NoWarn Condition="'$(Configuration)' == 'Debug'">1591</NoWarn>
@@ -10,7 +15,6 @@
     <DefineConstants Condition="'$(ExcludeVulkan)' == 'true'">$(DefineConstants);EXCLUDE_VULKAN_BACKEND</DefineConstants>
     <DefineConstants Condition="'$(ExcludeMetal)' == 'true'">$(DefineConstants);EXCLUDE_METAL_BACKEND</DefineConstants>
     <DefineConstants Condition="'$(ExcludeOpenGL)' == 'true'">$(DefineConstants);EXCLUDE_OPENGL_BACKEND</DefineConstants>
-    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
