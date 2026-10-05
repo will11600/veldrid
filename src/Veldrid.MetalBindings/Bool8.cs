@@ -16,5 +16,5 @@ public struct Bool8
 
     public static implicit operator bool(Bool8 b) => b.Value != 0;
     public static implicit operator byte(Bool8 b) => b.Value;
-    public static implicit operator Bool8(bool b) => new Bool8(b);
+    public static implicit operator Bool8(bool b) => new(b);
 }

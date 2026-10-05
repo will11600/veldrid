@@ -73,18 +73,18 @@ internal class D3D11CommandList : CommandList
     private readonly D3D11Sampler[] _vertexBoundSamplers = new D3D11Sampler[MaxCachedSamplers];
     private readonly D3D11Sampler[] _fragmentBoundSamplers = new D3D11Sampler[MaxCachedSamplers];
 
-    private readonly Dictionary<Texture, List<BoundTextureInfo>> _boundSRVs = new Dictionary<Texture, List<BoundTextureInfo>>();
-    private readonly Dictionary<Texture, List<BoundTextureInfo>> _boundUAVs = new Dictionary<Texture, List<BoundTextureInfo>>();
-    private readonly List<List<BoundTextureInfo>> _boundTextureInfoPool = new List<List<BoundTextureInfo>>(20);
+    private readonly Dictionary<Texture, List<BoundTextureInfo>> _boundSRVs = new();
+    private readonly Dictionary<Texture, List<BoundTextureInfo>> _boundUAVs = new();
+    private readonly List<List<BoundTextureInfo>> _boundTextureInfoPool = new(20);
 
     private const int MaxUAVs = 8;
-    private readonly List<(DeviceBuffer, int)> _boundComputeUAVBuffers = new List<(DeviceBuffer, int)>(MaxUAVs);
-    private readonly List<(DeviceBuffer, int)> _boundOMUAVBuffers = new List<(DeviceBuffer, int)>(MaxUAVs);
+    private readonly List<(DeviceBuffer, int)> _boundComputeUAVBuffers = new(MaxUAVs);
+    private readonly List<(DeviceBuffer, int)> _boundOMUAVBuffers = new(MaxUAVs);
 
-    private readonly List<D3D11Buffer> _availableStagingBuffers = new List<D3D11Buffer>();
-    private readonly List<D3D11Buffer> _submittedStagingBuffers = new List<D3D11Buffer>();
+    private readonly List<D3D11Buffer> _availableStagingBuffers = new();
+    private readonly List<D3D11Buffer> _submittedStagingBuffers = new();
 
-    private readonly List<D3D11Swapchain> _referencedSwapchains = new List<D3D11Swapchain>();
+    private readonly List<D3D11Swapchain> _referencedSwapchains = new();
 
     public D3D11CommandList(D3D11GraphicsDevice gd, ref CommandListDescription description)
         : base(ref description, gd.Features, gd.UniformBufferMinOffsetAlignment, gd.StructuredBufferMinOffsetAlignment)
@@ -1254,7 +1254,7 @@ internal class D3D11CommandList : CommandList
         D3D11Buffer srcD3D11Buffer = Util.AssertSubtype<DeviceBuffer, D3D11Buffer>(source);
         D3D11Buffer dstD3D11Buffer = Util.AssertSubtype<DeviceBuffer, D3D11Buffer>(destination);
 
-        Box region = new Box((int)sourceOffset, 0, 0, (int)(sourceOffset + sizeInBytes), 1, 1);
+        Box region = new((int)sourceOffset, 0, 0, (int)(sourceOffset + sizeInBytes), 1, 1);
 
         _context.CopySubresourceRegion(dstD3D11Buffer.Buffer, 0, (int)destinationOffset, 0, 0, srcD3D11Buffer.Buffer, 0, region);
     }

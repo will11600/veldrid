@@ -21,7 +21,7 @@ internal static unsafe class LibOvrNative
         string libName = Environment.Is64BitProcess ? LibName64 : LibName32;
         try
         {
-            NativeLibrary lib = new NativeLibrary(libName);
+            NativeLibrary lib = new(libName);
 
             p_ovr_Initialize = lib.LoadFunction<ovr_Initialize_t>("ovr_Initialize");
             p_ovr_Shutdown = lib.LoadFunction<ovr_Shutdown_t>("ovr_Shutdown");
@@ -684,7 +684,7 @@ internal struct ovrBool
 {
     public readonly byte Value;
     public static implicit operator bool(ovrBool b8) => b8.Value != 0;
-    public static implicit operator ovrBool(bool b) => new ovrBool(b);
+    public static implicit operator ovrBool(bool b) => new(b);
 
     public ovrBool(bool value)
     {

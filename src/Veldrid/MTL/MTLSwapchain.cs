@@ -45,7 +45,7 @@ internal class MTLSwapchain : Swapchain
         SwapchainSource source = description.Source;
         if (source is NSWindowSwapchainSource nsWindowSource)
         {
-            NSWindow nswindow = new NSWindow(nsWindowSource.NSWindow);
+            NSWindow nswindow = new(nsWindowSource.NSWindow);
             NSView contentView = nswindow.contentView;
             CGSize windowContentSize = contentView.frame.size;
             width = (uint)windowContentSize.width;
@@ -60,7 +60,7 @@ internal class MTLSwapchain : Swapchain
         }
         else if (source is NSViewSwapchainSource nsViewSource)
         {
-            NSView contentView = new NSView(nsViewSource.NSView);
+            NSView contentView = new(nsViewSource.NSView);
             CGSize windowContentSize = contentView.frame.size;
             width = (uint)windowContentSize.width;
             height = (uint)windowContentSize.height;

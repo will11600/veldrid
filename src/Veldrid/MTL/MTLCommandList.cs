@@ -437,7 +437,7 @@ internal unsafe class MTLCommandList : CommandList
                     ? mipHeight
                     : height;
 
-                MTLSize sourceSize = new MTLSize(copyWidth, copyHeight, depth);
+                MTLSize sourceSize = new(copyWidth, copyHeight, depth);
                 if (dstMTLTexture.Type != TextureType.Texture3D)
                 {
                     srcDepthPitch = 0;
@@ -540,8 +540,8 @@ internal unsafe class MTLCommandList : CommandList
         else if (!srcIsStaging && dstIsStaging)
         {
             // Normal -> Staging
-            MTLOrigin srcOrigin = new MTLOrigin(srcX, srcY, srcZ);
-            MTLSize srcSize = new MTLSize(width, height, depth);
+            MTLOrigin srcOrigin = new(srcX, srcY, srcZ);
+            MTLSize srcSize = new(width, height, depth);
             for (uint layer = 0; layer < layerCount; layer++)
             {
                 dstMTLTexture.GetSubresourceLayout(

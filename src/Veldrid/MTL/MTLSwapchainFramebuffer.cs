@@ -47,7 +47,7 @@ internal class MTLSwapchainFramebuffer : MTLFramebufferBase
             RecreateDepthTexture(width, height);
             _depthTarget = new FramebufferAttachment(_depthTexture, 0);
         }
-        OutputAttachmentDescription colorAttachment = new OutputAttachmentDescription(colorFormat);
+        OutputAttachmentDescription colorAttachment = new(colorFormat);
 
         OutputDescription = new OutputDescription(depthAttachment, colorAttachment);
         _placeholderTexture = new MTLPlaceholderTexture(colorFormat);

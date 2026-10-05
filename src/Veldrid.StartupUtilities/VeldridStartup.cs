@@ -55,7 +55,7 @@ public static class VeldridStartup
         {
             flags |= SDL_WindowFlags.Shown;
         }
-        Sdl2Window window = new Sdl2Window(
+        Sdl2Window window = new(
             windowCI.WindowTitle,
             windowCI.X,
             windowCI.Y,
@@ -173,7 +173,7 @@ public static class VeldridStartup
         bool colorSrgb)
     {
         SwapchainSource source = GetSwapchainSource(window);
-        SwapchainDescription swapchainDesc = new SwapchainDescription(
+        SwapchainDescription swapchainDesc = new(
             source,
             (uint)window.Width, (uint)window.Height,
             options.SwapchainDepthFormat,
@@ -212,7 +212,7 @@ public static class VeldridStartup
         Sdl2Window window,
         bool colorSrgb)
     {
-        SwapchainDescription scDesc = new SwapchainDescription(
+        SwapchainDescription scDesc = new(
             GetSwapchainSource(window),
             (uint)window.Width,
             (uint)window.Height,
@@ -276,7 +276,7 @@ public static class VeldridStartup
 
         result = Sdl2Native.SDL_GL_SetSwapInterval(options.SyncToVerticalBlank ? 1 : 0);
 
-        OpenGL.OpenGLPlatformInfo platformInfo = new OpenGL.OpenGLPlatformInfo(
+        OpenGL.OpenGLPlatformInfo platformInfo = new(
             contextHandle,
             Sdl2Native.SDL_GL_GetProcAddress,
             context => Sdl2Native.SDL_GL_MakeCurrent(sdlHandle, context),
@@ -367,7 +367,7 @@ public static class VeldridStartup
         Sdl2Window window)
     {
         SwapchainSource source = GetSwapchainSource(window);
-        SwapchainDescription swapchainDesc = new SwapchainDescription(
+        SwapchainDescription swapchainDesc = new(
             source,
             (uint)window.Width, (uint)window.Height,
             options.SwapchainDepthFormat,
@@ -390,7 +390,7 @@ public static class VeldridStartup
     }
 
 #if !EXCLUDE_OPENGL_BACKEND
-    private static readonly object s_glVersionLock = new object();
+    private static readonly object s_glVersionLock = new();
     private static (int Major, int Minor)? s_maxSupportedGLVersion;
     private static (int Major, int Minor)? s_maxSupportedGLESVersion;
 

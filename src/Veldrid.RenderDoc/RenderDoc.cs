@@ -359,7 +359,7 @@ public unsafe class RenderDoc
     {
         try
         {
-            NativeLibrary lib = new NativeLibrary(renderDocLibPaths);
+            NativeLibrary lib = new(renderDocLibPaths);
             renderDoc = new RenderDoc(lib);
             return true;
         }
@@ -374,7 +374,7 @@ public unsafe class RenderDoc
     {
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
-            List<string> paths = new List<string>();
+            List<string> paths = new();
             string programFiles = Environment.GetEnvironmentVariable("ProgramFiles");
             if (programFiles != null)
             {

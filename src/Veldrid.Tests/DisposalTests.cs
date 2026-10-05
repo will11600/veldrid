@@ -58,10 +58,10 @@ public abstract class DisposalTestBase<T> : GraphicsDeviceTestBase<T> where T : 
     public void Dispose_Pipeline()
     {
         Shader[] shaders = TestShaders.LoadVertexFragment(RF, "UIntVertexAttribs");
-        ShaderSetDescription shaderSet = new ShaderSetDescription(
+        ShaderSetDescription shaderSet = new(
             new VertexLayoutDescription[]
             {
-                new VertexLayoutDescription(
+                new(
                     new VertexElementDescription("Position", VertexElementSemantic.TextureCoordinate, VertexElementFormat.Float2),
                     new VertexElementDescription("Color_UInt", VertexElementSemantic.TextureCoordinate, VertexElementFormat.UInt4))
             },
@@ -71,7 +71,7 @@ public abstract class DisposalTestBase<T> : GraphicsDeviceTestBase<T> where T : 
             new ResourceLayoutElementDescription("InfoBuffer", ResourceKind.UniformBuffer, ShaderStages.Vertex),
             new ResourceLayoutElementDescription("Ortho", ResourceKind.UniformBuffer, ShaderStages.Vertex)));
 
-        GraphicsPipelineDescription gpd = new GraphicsPipelineDescription(
+        GraphicsPipelineDescription gpd = new(
             BlendStateDescription.SingleOverrideBlend,
             DepthStencilStateDescription.Disabled,
             RasterizerStateDescription.Default,

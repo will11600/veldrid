@@ -37,7 +37,7 @@ public static unsafe partial class Sdl2Native
             names = new[] { "SDL2.dll" };
         }
 
-        NativeLibrary lib = new NativeLibrary(names);
+        NativeLibrary lib = new(names);
         return lib;
     }
 

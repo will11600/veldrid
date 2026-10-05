@@ -11,8 +11,8 @@ namespace Veldrid;
 /// </summary>
 public abstract class GraphicsDevice : IDisposable
 {
-    private readonly object _deferredDisposalLock = new object();
-    private readonly List<IDisposable> _disposables = new List<IDisposable>();
+    private readonly object _deferredDisposalLock = new();
+    private readonly List<IDisposable> _disposables = new();
     private Sampler _aniso4xSampler;
 
     internal GraphicsDevice() { }
@@ -1051,7 +1051,7 @@ public abstract class GraphicsDevice : IDisposable
     /// <returns>A new <see cref="GraphicsDevice"/> using the Direct3D 11 API.</returns>
     public static GraphicsDevice CreateD3D11(GraphicsDeviceOptions options, IntPtr hwnd, uint width, uint height)
     {
-        SwapchainDescription swapchainDescription = new SwapchainDescription(
+        SwapchainDescription swapchainDescription = new(
             SwapchainSource.CreateWin32(hwnd, IntPtr.Zero),
             width, height,
             options.SwapchainDepthFormat,
@@ -1079,7 +1079,7 @@ public abstract class GraphicsDevice : IDisposable
         double renderHeight,
         float logicalDpi)
     {
-        SwapchainDescription swapchainDescription = new SwapchainDescription(
+        SwapchainDescription swapchainDescription = new(
             SwapchainSource.CreateUwp(swapChainPanel, logicalDpi),
             (uint)renderWidth,
             (uint)renderHeight,
@@ -1149,7 +1149,7 @@ public abstract class GraphicsDevice : IDisposable
     /// <returns>A new <see cref="GraphicsDevice"/> using the Vulkan API.</returns>
     public static GraphicsDevice CreateVulkan(GraphicsDeviceOptions options, Vk.VkSurfaceSource surfaceSource, uint width, uint height)
     {
-        SwapchainDescription scDesc = new SwapchainDescription(
+        SwapchainDescription scDesc = new(
             surfaceSource.GetSurfaceSource(),
             width, height,
             options.SwapchainDepthFormat,
@@ -1226,7 +1226,7 @@ public abstract class GraphicsDevice : IDisposable
     /// <returns>A new <see cref="GraphicsDevice"/> using the Metal API.</returns>
     public static GraphicsDevice CreateMetal(GraphicsDeviceOptions options, IntPtr nsWindow)
     {
-        SwapchainDescription swapchainDesc = new SwapchainDescription(
+        SwapchainDescription swapchainDesc = new(
             new NSWindowSwapchainSource(nsWindow),
             0, 0,
             options.SwapchainDepthFormat,

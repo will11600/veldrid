@@ -47,7 +47,7 @@ internal unsafe class FixedUtf8String : IDisposable
     }
 
     public static implicit operator byte* (FixedUtf8String utf8String) => utf8String.StringPtr;
-    public static implicit operator IntPtr(FixedUtf8String utf8String) => new IntPtr(utf8String.StringPtr);
-    public static implicit operator FixedUtf8String(string s) => new FixedUtf8String(s);
+    public static implicit operator IntPtr(FixedUtf8String utf8String) => new(utf8String.StringPtr);
+    public static implicit operator FixedUtf8String(string s) => new(s);
     public static implicit operator string(FixedUtf8String utf8String) => utf8String.GetString();
 }

@@ -16,7 +16,7 @@ public class ObjParser
     private static readonly char[] s_whitespaceChars = new char[] { ' ' };
     private static readonly char[] s_slashChar = new char[] { '/' };
 
-    private readonly ParseContext _pc = new ParseContext();
+    private readonly ParseContext _pc = new();
 
     /// <summary>
     /// Parses an <see cref="ObjFile"/> from the given raw text lines.
@@ -42,7 +42,7 @@ public class ObjParser
     public ObjFile Parse(Stream s)
     {
         string text;
-        using (StreamReader sr = new StreamReader(s))
+        using (StreamReader sr = new(s))
         {
             text = sr.ReadToEnd();
         }
@@ -72,16 +72,16 @@ public class ObjParser
 
     private class ParseContext
     {
-        private List<Vector3> _positions = new List<Vector3>();
-        private List<Vector3> _normals = new List<Vector3>();
-        private List<Vector2> _texCoords = new List<Vector2>();
+        private List<Vector3> _positions = new();
+        private List<Vector3> _normals = new();
+        private List<Vector2> _texCoords = new();
 
-        private List<ObjFile.MeshGroup> _groups = new List<ObjFile.MeshGroup>();
+        private List<ObjFile.MeshGroup> _groups = new();
 
         private string _currentGroupName;
         private string _currentMaterial;
         private int _currentSmoothingGroup;
-        private List<ObjFile.Face> _currentGroupFaces = new List<ObjFile.Face>();
+        private List<ObjFile.Face> _currentGroupFaces = new();
 
         private int _currentLine;
         private string _currentLineText;
@@ -386,9 +386,9 @@ public class ObjFile
     /// <returns>A new <see cref="ConstructedMeshInfo"/>.</returns>
     public ConstructedMeshInfo GetMesh(MeshGroup group)
     {
-        Dictionary<FaceVertex, ushort> vertexMap = new Dictionary<FaceVertex, ushort>();
+        Dictionary<FaceVertex, ushort> vertexMap = new();
         ushort[] indices = new ushort[group.Faces.Length * 3];
-        List<VertexPositionNormalTexture> vertices = new List<VertexPositionNormalTexture>();
+        List<VertexPositionNormalTexture> vertices = new();
 
         for (int i = 0; i < group.Faces.Length; i++)
         {

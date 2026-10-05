@@ -36,7 +36,7 @@ internal class OpenGLResourceFactory : ResourceFactory
 
     public override Pipeline CreateComputePipeline(ref ComputePipelineDescription description)
     {
-        OpenGLPipeline pipeline = new OpenGLPipeline(_gd, ref description);
+        OpenGLPipeline pipeline = new(_gd, ref description);
         _gd.EnsureResourceInitialized(pipeline);
         return pipeline;
     }
@@ -60,7 +60,7 @@ internal class OpenGLResourceFactory : ResourceFactory
     protected override Shader CreateShaderCore(ref ShaderDescription description)
     {
         StagingBlock stagingBlock = _pool.Stage(description.ShaderBytes);
-        OpenGLShader shader = new OpenGLShader(_gd, description.Stage, stagingBlock, description.EntryPoint);
+        OpenGLShader shader = new(_gd, description.Stage, stagingBlock, description.EntryPoint);
         _gd.EnsureResourceInitialized(shader);
         return shader;
     }

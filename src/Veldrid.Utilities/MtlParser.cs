@@ -14,7 +14,7 @@ public class MtlParser
 {
     private static readonly string[] s_newline = new string[] { "\n" };
 
-    private readonly ParseContext _pc = new ParseContext();
+    private readonly ParseContext _pc = new();
 
     /// <summary>
     /// Parses a <see cref="MtlFile"/> from the given array of text lines.
@@ -40,7 +40,7 @@ public class MtlParser
     public MtlFile Parse(Stream s)
     {
         string text;
-        using (StreamReader sr = new StreamReader(s))
+        using (StreamReader sr = new(s))
         {
             text = sr.ReadToEnd();
         }
@@ -72,7 +72,7 @@ public class MtlParser
     {
         private static readonly char[] s_whitespaceChars = new char[] { ' ' };
 
-        private readonly List<MaterialDefinition> _definitions = new List<MaterialDefinition>();
+        private readonly List<MaterialDefinition> _definitions = new();
         private MaterialDefinition _currentDefinition;
 
         private int _currentLine;

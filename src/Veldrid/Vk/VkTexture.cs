@@ -275,7 +275,7 @@ internal unsafe class VkTexture : Texture
             VkImageAspectFlags aspect = (Usage & TextureUsage.DepthStencil) == TextureUsage.DepthStencil
               ? (VkImageAspectFlags.Depth | VkImageAspectFlags.Stencil)
               : VkImageAspectFlags.Color;
-            VkImageSubresource imageSubresource = new VkImageSubresource
+            VkImageSubresource imageSubresource = new()
             {
                 arrayLayer = arrayLayer,
                 mipLevel = mipLevel,
@@ -292,7 +292,7 @@ internal unsafe class VkTexture : Texture
             uint rowPitch = FormatHelpers.GetRowPitch(mipWidth, Format);
             uint depthPitch = FormatHelpers.GetDepthPitch(rowPitch, mipHeight, Format);
 
-            VkSubresourceLayout layout = new VkSubresourceLayout()
+            VkSubresourceLayout layout = new()
             {
                 rowPitch = rowPitch,
                 depthPitch = depthPitch,

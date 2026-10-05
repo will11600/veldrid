@@ -17,7 +17,7 @@ internal static class D3D11Util
         uint layerCount,
         PixelFormat format)
     {
-        ShaderResourceViewDescription srvDesc = new ShaderResourceViewDescription();
+        ShaderResourceViewDescription srvDesc = new();
         srvDesc.Format = D3D11Formats.GetViewFormat(
             D3D11Formats.ToDxgiFormat(format, (tex.Usage & TextureUsage.DepthStencil) != 0));
 

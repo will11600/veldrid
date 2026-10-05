@@ -34,7 +34,7 @@ public class FormatSizeHelpersTests : IDisposable
         }
     }
 
-    private static HashSet<PixelFormat> CompressedPixelFormats = new HashSet<PixelFormat>() {
+    private static HashSet<PixelFormat> CompressedPixelFormats = new() {
         PixelFormat.BC1_Rgba_UNorm,
         PixelFormat.BC1_Rgba_UNorm_SRgb,
         PixelFormat.BC1_Rgb_UNorm,

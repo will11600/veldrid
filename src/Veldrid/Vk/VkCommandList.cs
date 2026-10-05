@@ -25,7 +25,7 @@ internal unsafe class VkCommandList : CommandList
     private VkClearValue[] _clearValues = Array.Empty<VkClearValue>();
     private bool[] _validColorClearValues = Array.Empty<bool>();
     private VkClearValue? _depthClearValue;
-    private readonly List<VkTexture> _preDrawSampledImages = new List<VkTexture>();
+    private readonly List<VkTexture> _preDrawSampledImages = new();
 
     // Graphics State
     private VkFramebufferBase _currentFramebuffer;
@@ -43,15 +43,15 @@ internal unsafe class VkCommandList : CommandList
     private bool[] _computeResourceSetsChanged;
     private string _name;
 
-    private readonly object _commandBufferListLock = new object();
-    private readonly Queue<VkCommandBuffer> _availableCommandBuffers = new Queue<VkCommandBuffer>();
-    private readonly List<VkCommandBuffer> _submittedCommandBuffers = new List<VkCommandBuffer>();
+    private readonly object _commandBufferListLock = new();
+    private readonly Queue<VkCommandBuffer> _availableCommandBuffers = new();
+    private readonly List<VkCommandBuffer> _submittedCommandBuffers = new();
 
     private StagingResourceInfo _currentStagingInfo;
-    private readonly object _stagingLock = new object();
-    private readonly Dictionary<VkCommandBuffer, StagingResourceInfo> _submittedStagingInfos = new Dictionary<VkCommandBuffer, StagingResourceInfo>();
-    private readonly List<StagingResourceInfo> _availableStagingInfos = new List<StagingResourceInfo>();
-    private readonly List<VkBuffer> _availableStagingBuffers = new List<VkBuffer>();
+    private readonly object _stagingLock = new();
+    private readonly Dictionary<VkCommandBuffer, StagingResourceInfo> _submittedStagingInfos = new();
+    private readonly List<StagingResourceInfo> _availableStagingInfos = new();
+    private readonly List<VkBuffer> _availableStagingBuffers = new();
 
     public VkCommandPool CommandPool => _pool;
     public VkCommandBuffer CommandBuffer => _cb;
@@ -173,14 +173,14 @@ internal unsafe class VkCommandList : CommandList
 
     private protected override void ClearColorTargetCore(uint index, RgbaFloat clearColor)
     {
-        VkClearValue clearValue = new VkClearValue
+        VkClearValue clearValue = new()
         {
             color = new VkClearColorValue(clearColor.R, clearColor.G, clearColor.B, clearColor.A)
         };
 
         if (_activeRenderPass != VkRenderPass.Null)
         {
-            VkClearAttachment clearAttachment = new VkClearAttachment
+            VkClearAttachment clearAttachment = new()
             {
                 colorAttachment = index,
                 aspectMask = VkImageAspectFlags.Color,
@@ -188,7 +188,7 @@ internal unsafe class VkCommandList : CommandList
             };
 
             Texture colorTex = _currentFramebuffer.ColorTargets[(int)index].Target;
-            VkClearRect clearRect = new VkClearRect
+            VkClearRect clearRect = new()
             {
                 baseArrayLayer = 0,
                 layerCount = 1,
@@ -207,14 +207,14 @@ internal unsafe class VkCommandList : CommandList
 
     private protected override void ClearDepthStencilCore(float depth, byte stencil)
     {
-        VkClearValue clearValue = new VkClearValue { depthStencil = new VkClearDepthStencilValue(depth, stencil) };
+        VkClearValue clearValue = new() { depthStencil = new VkClearDepthStencilValue(depth, stencil) };
 
         if (_activeRenderPass != VkRenderPass.Null)
         {
             VkImageAspectFlags aspect = FormatHelpers.IsStencilFormat(_currentFramebuffer.DepthTarget.Value.Target.Format)
                 ? VkImageAspectFlags.Depth | VkImageAspectFlags.Stencil
                 : VkImageAspectFlags.Depth;
-            VkClearAttachment clearAttachment = new VkClearAttachment
+            VkClearAttachment clearAttachment = new()
             {
                 aspectMask = aspect,
                 clearValue = clearValue
@@ -224,7 +224,7 @@ internal unsafe class VkCommandList : CommandList
             uint renderableHeight = _currentFramebuffer.RenderableHeight;
             if (renderableWidth > 0 && renderableHeight > 0)
             {
-                VkClearRect clearRect = new VkClearRect
+                VkClearRect clearRect = new()
                 {
                     baseArrayLayer = 0,
                     layerCount = 1,
@@ -415,7 +415,7 @@ internal unsafe class VkCommandList : CommandList
         VkImageAspectFlags aspectFlags = ((source.Usage & TextureUsage.DepthStencil) == TextureUsage.DepthStencil)
             ? VkImageAspectFlags.Depth | VkImageAspectFlags.Stencil
             : VkImageAspectFlags.Color;
-        VkImageResolve region = new VkImageResolve
+        VkImageResolve region = new()
         {
             extent = new VkExtent3D { width = source.Width, height = source.Height, depth = source.Depth },
             srcSubresource = new VkImageSubresourceLayers { layerCount = 1, aspectMask = aspectFlags },
@@ -563,7 +563,7 @@ internal unsafe class VkCommandList : CommandList
                     {
                         _validColorClearValues[i] = false;
                         VkClearValue vkClearValue = _clearValues[i];
-                        RgbaFloat clearColor = new RgbaFloat(
+                        RgbaFloat clearColor = new(
                             vkClearValue.color.float32_0,
                             vkClearValue.color.float32_1,
                             vkClearValue.color.float32_2,
@@ -691,7 +691,7 @@ internal unsafe class VkCommandList : CommandList
     {
         if (index == 0 || _gd.Features.MultipleViewports)
         {
-            VkRect2D scissor = new VkRect2D((int)x, (int)y, (int)width, (int)height);
+            VkRect2D scissor = new((int)x, (int)y, (int)width, (int)height);
             if (_scissorRects[index] != scissor)
             {
                 _scissorRects[index] = scissor;
@@ -711,7 +711,7 @@ internal unsafe class VkCommandList : CommandList
                 ? viewport.Height
                 : -viewport.Height;
 
-            VkViewport vkViewport = new VkViewport
+            VkViewport vkViewport = new()
             {
                 x = viewport.X,
                 y = vpY,
@@ -746,7 +746,7 @@ internal unsafe class VkCommandList : CommandList
         VkBuffer dstVkBuffer = Util.AssertSubtype<DeviceBuffer, VkBuffer>(destination);
         _currentStagingInfo.Resources.Add(dstVkBuffer.RefCount);
 
-        VkBufferCopy region = new VkBufferCopy
+        VkBufferCopy region = new()
         {
             srcOffset = sourceOffset,
             dstOffset = destinationOffset,
@@ -821,7 +821,7 @@ internal unsafe class VkCommandList : CommandList
 
         if (!sourceIsStaging && !destIsStaging)
         {
-            VkImageSubresourceLayers srcSubresource = new VkImageSubresourceLayers
+            VkImageSubresourceLayers srcSubresource = new()
             {
                 aspectMask = VkImageAspectFlags.Color,
                 layerCount = layerCount,
@@ -829,7 +829,7 @@ internal unsafe class VkCommandList : CommandList
                 baseArrayLayer = srcBaseArrayLayer
             };
 
-            VkImageSubresourceLayers dstSubresource = new VkImageSubresourceLayers
+            VkImageSubresourceLayers dstSubresource = new()
             {
                 aspectMask = VkImageAspectFlags.Color,
                 layerCount = layerCount,
@@ -837,7 +837,7 @@ internal unsafe class VkCommandList : CommandList
                 baseArrayLayer = dstBaseArrayLayer
             };
 
-            VkImageCopy region = new VkImageCopy
+            VkImageCopy region = new()
             {
                 srcOffset = new VkOffset3D { x = (int)srcX, y = (int)srcY, z = (int)srcZ },
                 dstOffset = new VkOffset3D { x = (int)dstX, y = (int)dstY, z = (int)dstZ },
@@ -907,7 +907,7 @@ internal unsafe class VkCommandList : CommandList
                 layerCount,
                 VkImageLayout.TransferDstOptimal);
 
-            VkImageSubresourceLayers dstSubresource = new VkImageSubresourceLayers
+            VkImageSubresourceLayers dstSubresource = new()
             {
                 aspectMask = VkImageAspectFlags.Color,
                 layerCount = layerCount,
@@ -930,7 +930,7 @@ internal unsafe class VkCommandList : CommandList
             uint copyWidth = Math.Min(width, mipWidth);
             uint copyheight = Math.Min(height, mipHeight);
 
-            VkBufferImageCopy regions = new VkBufferImageCopy
+            VkBufferImageCopy regions = new()
             {
                 bufferOffset = srcLayout.offset
                     + (srcZ * depthPitch)
@@ -991,7 +991,7 @@ internal unsafe class VkCommandList : CommandList
                 VkSubresourceLayout dstLayout = dstVkTexture.GetSubresourceLayout(
                     dstVkTexture.CalculateSubresource(dstMipLevel, dstBaseArrayLayer + layer));
 
-                VkImageSubresourceLayers srcSubresource = new VkImageSubresourceLayers
+                VkImageSubresourceLayers srcSubresource = new()
                 {
                     aspectMask = aspect,
                     layerCount = 1,
@@ -999,7 +999,7 @@ internal unsafe class VkCommandList : CommandList
                     baseArrayLayer = srcBaseArrayLayer + layer
                 };
 
-                VkBufferImageCopy region = new VkBufferImageCopy
+                VkBufferImageCopy region = new()
                 {
                     bufferRowLength = bufferRowLength,
                     bufferImageHeight = bufferImageHeight,
@@ -1046,7 +1046,7 @@ internal unsafe class VkCommandList : CommandList
                 {
                     for (uint yy = 0; yy < height; yy++)
                     {
-                        VkBufferCopy region = new VkBufferCopy
+                        VkBufferCopy region = new()
                         {
                             srcOffset = srcLayout.offset
                                 + srcLayout.depthPitch * (zz + srcZ)
@@ -1077,7 +1077,7 @@ internal unsafe class VkCommandList : CommandList
                 {
                     for (uint row = 0; row < numRows; row++)
                     {
-                        VkBufferCopy region = new VkBufferCopy
+                        VkBufferCopy region = new()
                         {
                             srcOffset = srcLayout.offset
                                 + srcLayout.depthPitch * (zz + srcZ)

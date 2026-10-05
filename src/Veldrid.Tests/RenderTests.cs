@@ -64,10 +64,10 @@ public abstract class RenderTests<T> : GraphicsDeviceTestBase<T> where T : Graph
             1);
         GD.UpdateBuffer(orthoBuffer, 0, ref orthoMatrix);
 
-        ShaderSetDescription shaderSet = new ShaderSetDescription(
+        ShaderSetDescription shaderSet = new(
             new VertexLayoutDescription[]
             {
-                new VertexLayoutDescription(
+                new(
                     new VertexElementDescription("Position", VertexElementSemantic.TextureCoordinate, VertexElementFormat.Float2),
                     new VertexElementDescription("Color_UInt", VertexElementSemantic.TextureCoordinate, VertexElementFormat.UInt4))
             },
@@ -79,7 +79,7 @@ public abstract class RenderTests<T> : GraphicsDeviceTestBase<T> where T : Graph
 
         ResourceSet set = RF.CreateResourceSet(new ResourceSetDescription(layout, infoBuffer, orthoBuffer));
 
-        GraphicsPipelineDescription gpd = new GraphicsPipelineDescription(
+        GraphicsPipelineDescription gpd = new(
             BlendStateDescription.SingleOverrideBlend,
             DepthStencilStateDescription.Disabled,
             RasterizerStateDescription.Default,
@@ -94,8 +94,7 @@ public abstract class RenderTests<T> : GraphicsDeviceTestBase<T> where T : Graph
 
         UIntVertexAttribsVertex[] vertices = new UIntVertexAttribsVertex[]
         {
-            new UIntVertexAttribsVertex
-            {
+            new() {
                 Position = new Vector2(0.5f, 0.5f),
                 Color_Int = new UInt4
                 {
@@ -104,8 +103,7 @@ public abstract class RenderTests<T> : GraphicsDeviceTestBase<T> where T : Graph
                     Z = (uint)(0.75f * colorNormalizationFactor),
                 }
             },
-            new UIntVertexAttribsVertex
-            {
+            new() {
                 Position = new Vector2(10.5f, 12.5f),
                 Color_Int = new UInt4
                 {
@@ -114,8 +112,7 @@ public abstract class RenderTests<T> : GraphicsDeviceTestBase<T> where T : Graph
                     Z = (uint)(0.75f * colorNormalizationFactor),
                 }
             },
-            new UIntVertexAttribsVertex
-            {
+            new() {
                 Position = new Vector2(25.5f, 35.5f),
                 Color_Int = new UInt4
                 {
@@ -124,8 +121,7 @@ public abstract class RenderTests<T> : GraphicsDeviceTestBase<T> where T : Graph
                     Z = (uint)(0.25f * colorNormalizationFactor),
                 }
             },
-            new UIntVertexAttribsVertex
-            {
+            new() {
                 Position = new Vector2(49.5f, 49.5f),
                 Color_Int = new UInt4
                 {
@@ -168,7 +164,7 @@ public abstract class RenderTests<T> : GraphicsDeviceTestBase<T> where T : Graph
                 y = framebuffer.Height - y - 1;
             }
 
-            RgbaFloat expectedColor = new RgbaFloat(
+            RgbaFloat expectedColor = new(
                 vertex.Color_Int.X / (float)colorNormalizationFactor,
                 vertex.Color_Int.Y / (float)colorNormalizationFactor,
                 vertex.Color_Int.Z / (float)colorNormalizationFactor,
@@ -198,10 +194,10 @@ public abstract class RenderTests<T> : GraphicsDeviceTestBase<T> where T : Graph
             1);
         GD.UpdateBuffer(orthoBuffer, 0, ref orthoMatrix);
 
-        ShaderSetDescription shaderSet = new ShaderSetDescription(
+        ShaderSetDescription shaderSet = new(
             new VertexLayoutDescription[]
             {
-                new VertexLayoutDescription(
+                new(
                     new VertexElementDescription("Position", VertexElementSemantic.TextureCoordinate, VertexElementFormat.Float2),
                     new VertexElementDescription("Color", VertexElementSemantic.TextureCoordinate, VertexElementFormat.UShort4_Norm))
             },
@@ -212,7 +208,7 @@ public abstract class RenderTests<T> : GraphicsDeviceTestBase<T> where T : Graph
 
         ResourceSet set = RF.CreateResourceSet(new ResourceSetDescription(layout, orthoBuffer));
 
-        GraphicsPipelineDescription gpd = new GraphicsPipelineDescription(
+        GraphicsPipelineDescription gpd = new(
             BlendStateDescription.SingleOverrideBlend,
             DepthStencilStateDescription.Disabled,
             RasterizerStateDescription.Default,
@@ -225,29 +221,25 @@ public abstract class RenderTests<T> : GraphicsDeviceTestBase<T> where T : Graph
 
         VertexCPU_UShortNorm[] vertices = new VertexCPU_UShortNorm[]
         {
-            new VertexCPU_UShortNorm
-            {
+            new() {
                 Position = new Vector2(0.5f, 0.5f),
                 R = UShortNorm(0.25f),
                 G = UShortNorm(0.5f),
                 B = UShortNorm(0.75f),
             },
-            new VertexCPU_UShortNorm
-            {
+            new() {
                 Position = new Vector2(10.5f, 12.5f),
                 R = UShortNorm(0.25f),
                 G = UShortNorm(0.5f),
                 B = UShortNorm(0.75f),
             },
-            new VertexCPU_UShortNorm
-            {
+            new() {
                 Position = new Vector2(25.5f, 35.5f),
                 R = UShortNorm(0.75f),
                 G = UShortNorm(0.5f),
                 B = UShortNorm(0.25f),
             },
-            new VertexCPU_UShortNorm
-            {
+            new() {
                 Position = new Vector2(49.5f, 49.5f),
                 R = UShortNorm(0.15f),
                 G = UShortNorm(0.25f),
@@ -286,7 +278,7 @@ public abstract class RenderTests<T> : GraphicsDeviceTestBase<T> where T : Graph
                 y = framebuffer.Height - y - 1;
             }
 
-            RgbaFloat expectedColor = new RgbaFloat(
+            RgbaFloat expectedColor = new(
                 vertex.R / (float)ushort.MaxValue,
                 vertex.G / (float)ushort.MaxValue,
                 vertex.B / (float)ushort.MaxValue,
@@ -341,10 +333,10 @@ public abstract class RenderTests<T> : GraphicsDeviceTestBase<T> where T : Graph
             1);
         GD.UpdateBuffer(orthoBuffer, 0, ref orthoMatrix);
 
-        ShaderSetDescription shaderSet = new ShaderSetDescription(
+        ShaderSetDescription shaderSet = new(
             new VertexLayoutDescription[]
             {
-                new VertexLayoutDescription(
+                new(
                     new VertexElementDescription("Position", VertexElementSemantic.TextureCoordinate, VertexElementFormat.Float2),
                     new VertexElementDescription("Color_UInt", VertexElementSemantic.TextureCoordinate, VertexElementFormat.UShort4))
             },
@@ -356,7 +348,7 @@ public abstract class RenderTests<T> : GraphicsDeviceTestBase<T> where T : Graph
 
         ResourceSet set = RF.CreateResourceSet(new ResourceSetDescription(layout, infoBuffer, orthoBuffer));
 
-        GraphicsPipelineDescription gpd = new GraphicsPipelineDescription(
+        GraphicsPipelineDescription gpd = new(
             BlendStateDescription.SingleOverrideBlend,
             DepthStencilStateDescription.Disabled,
             RasterizerStateDescription.Default,
@@ -371,29 +363,25 @@ public abstract class RenderTests<T> : GraphicsDeviceTestBase<T> where T : Graph
 
         VertexCPU_UShort[] vertices = new VertexCPU_UShort[]
         {
-            new VertexCPU_UShort
-            {
+            new() {
                 Position = new Vector2(0.5f, 0.5f),
                 R = (ushort)(0.25f * colorNormalizationFactor),
                 G = (ushort)(0.5f * colorNormalizationFactor),
                 B = (ushort)(0.75f * colorNormalizationFactor),
             },
-            new VertexCPU_UShort
-            {
+            new() {
                 Position = new Vector2(10.5f, 12.5f),
                 R = (ushort)(0.25f * colorNormalizationFactor),
                 G = (ushort)(0.5f * colorNormalizationFactor),
                 B = (ushort)(0.75f * colorNormalizationFactor),
             },
-            new VertexCPU_UShort
-            {
+            new() {
                 Position = new Vector2(25.5f, 35.5f),
                 R = (ushort)(0.75f * colorNormalizationFactor),
                 G = (ushort)(0.5f * colorNormalizationFactor),
                 B = (ushort)(0.25f * colorNormalizationFactor),
             },
-            new VertexCPU_UShort
-            {
+            new() {
                 Position = new Vector2(49.5f, 49.5f),
                 R = (ushort)(0.15f * colorNormalizationFactor),
                 G = (ushort)(0.2f * colorNormalizationFactor),
@@ -433,7 +421,7 @@ public abstract class RenderTests<T> : GraphicsDeviceTestBase<T> where T : Graph
                 y = framebuffer.Height - y - 1;
             }
 
-            RgbaFloat expectedColor = new RgbaFloat(
+            RgbaFloat expectedColor = new(
                 vertex.R / (float)colorNormalizationFactor,
                 vertex.G / (float)colorNormalizationFactor,
                 vertex.B / (float)colorNormalizationFactor,
@@ -464,10 +452,10 @@ public abstract class RenderTests<T> : GraphicsDeviceTestBase<T> where T : Graph
             1);
         GD.UpdateBuffer(orthoBuffer, 0, ref orthoMatrix);
 
-        ShaderSetDescription shaderSet = new ShaderSetDescription(
+        ShaderSetDescription shaderSet = new(
             new VertexLayoutDescription[]
             {
-                new VertexLayoutDescription(
+                new(
                     new VertexElementDescription("Position", VertexElementSemantic.TextureCoordinate, VertexElementFormat.Float2),
                     new VertexElementDescription("Color_Half", VertexElementSemantic.TextureCoordinate, VertexElementFormat.Half4))
             },
@@ -479,7 +467,7 @@ public abstract class RenderTests<T> : GraphicsDeviceTestBase<T> where T : Graph
 
         ResourceSet set = RF.CreateResourceSet(new ResourceSetDescription(layout, infoBuffer, orthoBuffer));
 
-        GraphicsPipelineDescription gpd = new GraphicsPipelineDescription(
+        GraphicsPipelineDescription gpd = new(
             BlendStateDescription.SingleOverrideBlend,
             DepthStencilStateDescription.Disabled,
             RasterizerStateDescription.Default,
@@ -501,29 +489,25 @@ public abstract class RenderTests<T> : GraphicsDeviceTestBase<T> where T : Graph
 
         VertexCPU_UShort[] vertices = new VertexCPU_UShort[]
         {
-            new VertexCPU_UShort
-            {
+            new() {
                 Position = new Vector2(0.5f, 0.5f),
                 R = f16_625,
                 G = f16_1250,
                 B = f16_1875,
             },
-            new VertexCPU_UShort
-            {
+            new() {
                 Position = new Vector2(10.5f, 12.5f),
                 R = f16_625,
                 G = f16_1250,
                 B = f16_1875,
             },
-            new VertexCPU_UShort
-            {
+            new() {
                 Position = new Vector2(25.5f, 35.5f),
                 R = f16_1875,
                 G = f16_1250,
                 B = f16_625,
             },
-            new VertexCPU_UShort
-            {
+            new() {
                 Position = new Vector2(49.5f, 49.5f),
                 R = f16_375,
                 G = f16_500,
@@ -629,10 +613,10 @@ public abstract class RenderTests<T> : GraphicsDeviceTestBase<T> where T : Graph
         Texture shouldntBeSampledTexture = RF.CreateTexture(
             TextureDescription.Texture2D(1, 1, 1, 1, PixelFormat.R32_G32_B32_A32_Float, TextureUsage.Sampled));
 
-        ShaderSetDescription shaderSet = new ShaderSetDescription(
+        ShaderSetDescription shaderSet = new(
             new VertexLayoutDescription[]
             {
-                new VertexLayoutDescription(
+                new(
                     new VertexElementDescription("Position", VertexElementSemantic.TextureCoordinate, VertexElementFormat.Float2))
             },
             TestShaders.LoadVertexFragment(RF, "TexturedPoints"));
@@ -653,7 +637,7 @@ public abstract class RenderTests<T> : GraphicsDeviceTestBase<T> where T : Graph
             set = RF.CreateResourceSet(new ResourceSetDescription(layout, orthoBuffer, sampledTexture, GD.PointSampler));
         }
 
-        GraphicsPipelineDescription gpd = new GraphicsPipelineDescription(
+        GraphicsPipelineDescription gpd = new(
             BlendStateDescription.SingleOverrideBlend,
             DepthStencilStateDescription.Disabled,
             RasterizerStateDescription.Default,
@@ -666,10 +650,10 @@ public abstract class RenderTests<T> : GraphicsDeviceTestBase<T> where T : Graph
 
         Vector2[] vertices = new Vector2[]
         {
-            new Vector2(0.5f, 0.5f),
-            new Vector2(15.5f, 15.5f),
-            new Vector2(25.5f, 26.5f),
-            new Vector2(3.5f, 25.5f),
+            new(0.5f, 0.5f),
+            new(15.5f, 15.5f),
+            new(25.5f, 26.5f),
+            new(3.5f, 25.5f),
         };
 
         DeviceBuffer vb = RF.CreateBuffer(
@@ -936,7 +920,7 @@ public abstract class RenderTests<T> : GraphicsDeviceTestBase<T> where T : Graph
         Framebuffer framebuffer = RF.CreateFramebuffer(new FramebufferDescription(null, target));
 
         string SetName = arrayTexture ? "FullScreenTriSampleTextureArray" : "FullScreenTriSampleTexture";
-        ShaderSetDescription shaderSet = new ShaderSetDescription(
+        ShaderSetDescription shaderSet = new(
             Array.Empty<VertexLayoutDescription>(),
             TestShaders.LoadVertexFragment(RF, SetName));
 
@@ -953,7 +937,7 @@ public abstract class RenderTests<T> : GraphicsDeviceTestBase<T> where T : Graph
 
         ResourceSet set = RF.CreateResourceSet(new ResourceSetDescription(layout, tex1D, GD.PointSampler));
 
-        GraphicsPipelineDescription gpd = new GraphicsPipelineDescription(
+        GraphicsPipelineDescription gpd = new(
             BlendStateDescription.SingleOverrideBlend,
             DepthStencilStateDescription.Disabled,
             RasterizerStateDescription.CullNone,
@@ -1008,13 +992,13 @@ public abstract class RenderTests<T> : GraphicsDeviceTestBase<T> where T : Graph
 
         // This shader doesn't really matter, just as long as it is different to the first
         // and third render pass and also doesn't use any texture bindings
-        ShaderSetDescription textureShaderSet = new ShaderSetDescription(
+        ShaderSetDescription textureShaderSet = new(
             Array.Empty<VertexLayoutDescription>(),
             TestShaders.LoadVertexFragment(RF, "FullScreenTriSampleTexture2D"));
-        ShaderSetDescription quadShaderSet = new ShaderSetDescription(
+        ShaderSetDescription quadShaderSet = new(
             new VertexLayoutDescription[]
             {
-                new VertexLayoutDescription(
+                new(
                     new VertexElementDescription("A_V3", VertexElementSemantic.TextureCoordinate, VertexElementFormat.Float3),
                     new VertexElementDescription("B_V4", VertexElementSemantic.TextureCoordinate, VertexElementFormat.Float4),
                     new VertexElementDescription("C_V2", VertexElementSemantic.TextureCoordinate, VertexElementFormat.Float2),
@@ -1122,7 +1106,7 @@ public abstract class RenderTests<T> : GraphicsDeviceTestBase<T> where T : Graph
                 new[] { new FramebufferAttachmentDescription(target, targetLayer) }));
 
         string setName = "FullScreenTriSampleTexture2D";
-        ShaderSetDescription shaderSet = new ShaderSetDescription(
+        ShaderSetDescription shaderSet = new(
             Array.Empty<VertexLayoutDescription>(),
             TestShaders.LoadVertexFragment(RF, setName));
 
@@ -1138,7 +1122,7 @@ public abstract class RenderTests<T> : GraphicsDeviceTestBase<T> where T : Graph
 
         ResourceSet set = RF.CreateResourceSet(new ResourceSetDescription(layout, tex2D, GD.PointSampler));
 
-        GraphicsPipelineDescription gpd = new GraphicsPipelineDescription(
+        GraphicsPipelineDescription gpd = new(
             BlendStateDescription.SingleOverrideBlend,
             DepthStencilStateDescription.Disabled,
             RasterizerStateDescription.CullNone,
@@ -1192,7 +1176,7 @@ public abstract class RenderTests<T> : GraphicsDeviceTestBase<T> where T : Graph
                 new[] { new FramebufferAttachmentDescription(target, (targetLayer * 6) + targetFace) }));
 
         string setName = "FullScreenTriSampleTexture2D";
-        ShaderSetDescription shaderSet = new ShaderSetDescription(
+        ShaderSetDescription shaderSet = new(
             Array.Empty<VertexLayoutDescription>(),
             TestShaders.LoadVertexFragment(RF, setName));
 
@@ -1208,7 +1192,7 @@ public abstract class RenderTests<T> : GraphicsDeviceTestBase<T> where T : Graph
 
         ResourceSet set = RF.CreateResourceSet(new ResourceSetDescription(layout, tex2D, GD.PointSampler));
 
-        GraphicsPipelineDescription gpd = new GraphicsPipelineDescription(
+        GraphicsPipelineDescription gpd = new(
             BlendStateDescription.SingleOverrideBlend,
             DepthStencilStateDescription.Disabled,
             RasterizerStateDescription.CullNone,
@@ -1250,7 +1234,7 @@ public abstract class RenderTests<T> : GraphicsDeviceTestBase<T> where T : Graph
         Framebuffer framebuffer = RF.CreateFramebuffer(new FramebufferDescription(depthTarget));
 
         string setName = "FullScreenWriteDepth";
-        ShaderSetDescription shaderSet = new ShaderSetDescription(
+        ShaderSetDescription shaderSet = new(
             Array.Empty<VertexLayoutDescription>(),
             TestShaders.LoadVertexFragment(RF, setName));
 
@@ -1261,7 +1245,7 @@ public abstract class RenderTests<T> : GraphicsDeviceTestBase<T> where T : Graph
         GD.UpdateBuffer(ub, 0, new Vector4(depthTarget.Width, depthTarget.Height, 0, 0));
         ResourceSet rs = RF.CreateResourceSet(new ResourceSetDescription(layout, ub));
 
-        GraphicsPipelineDescription gpd = new GraphicsPipelineDescription(
+        GraphicsPipelineDescription gpd = new(
             BlendStateDescription.SingleOverrideBlend,
             new DepthStencilStateDescription(true, true, ComparisonKind.Always),
             RasterizerStateDescription.CullNone,

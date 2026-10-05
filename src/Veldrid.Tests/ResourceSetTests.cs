@@ -123,10 +123,10 @@ public abstract class ResourceSetTests<T> : GraphicsDeviceTestBase<T> where T : 
         DeviceBuffer infoBuffer = RF.CreateBuffer(new BufferDescription(16, BufferUsage.UniformBuffer));
         DeviceBuffer orthoBuffer = RF.CreateBuffer(new BufferDescription(64, BufferUsage.UniformBuffer));
 
-        ShaderSetDescription shaderSet = new ShaderSetDescription(
+        ShaderSetDescription shaderSet = new(
             new VertexLayoutDescription[]
             {
-                new VertexLayoutDescription(
+                new(
                     new VertexElementDescription("Position", VertexElementSemantic.TextureCoordinate, VertexElementFormat.Float2),
                     new VertexElementDescription("Color_UInt", VertexElementSemantic.TextureCoordinate, VertexElementFormat.UInt4))
             },
@@ -138,7 +138,7 @@ public abstract class ResourceSetTests<T> : GraphicsDeviceTestBase<T> where T : 
 
         ResourceSet set = RF.CreateResourceSet(new ResourceSetDescription(layout, infoBuffer, orthoBuffer));
 
-        GraphicsPipelineDescription gpd = new GraphicsPipelineDescription(
+        GraphicsPipelineDescription gpd = new(
             BlendStateDescription.SingleOverrideBlend,
             DepthStencilStateDescription.Disabled,
             RasterizerStateDescription.Default,
@@ -164,10 +164,10 @@ public abstract class ResourceSetTests<T> : GraphicsDeviceTestBase<T> where T : 
         DeviceBuffer infoBuffer = RF.CreateBuffer(new BufferDescription(16, BufferUsage.UniformBuffer));
         DeviceBuffer orthoBuffer = RF.CreateBuffer(new BufferDescription(64, BufferUsage.UniformBuffer));
 
-        ShaderSetDescription shaderSet = new ShaderSetDescription(
+        ShaderSetDescription shaderSet = new(
             new VertexLayoutDescription[]
             {
-                new VertexLayoutDescription(
+                new(
                     new VertexElementDescription("Position", VertexElementSemantic.TextureCoordinate, VertexElementFormat.Float2),
                     new VertexElementDescription("Color_UInt", VertexElementSemantic.TextureCoordinate, VertexElementFormat.UInt4))
             },
@@ -191,7 +191,7 @@ public abstract class ResourceSetTests<T> : GraphicsDeviceTestBase<T> where T : 
         ResourceSet set2 = RF.CreateResourceSet(new ResourceSetDescription(layout2, infoBuffer, texView));
         ResourceSet set3 = RF.CreateResourceSet(new ResourceSetDescription(layout3, infoBuffer));
 
-        GraphicsPipelineDescription gpd = new GraphicsPipelineDescription(
+        GraphicsPipelineDescription gpd = new(
             BlendStateDescription.SingleOverrideBlend,
             DepthStencilStateDescription.Disabled,
             RasterizerStateDescription.Default,

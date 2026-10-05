@@ -10,9 +10,9 @@ namespace Veldrid.Sdl2;
 
 internal static class Sdl2WindowRegistry
 {
-    public static readonly object Lock = new object();
+    public static readonly object Lock = new();
     private static readonly Dictionary<uint, Sdl2Window> _eventsByWindowID
-        = new Dictionary<uint, Sdl2Window>();
+        = new();
     private static bool _firstInit;
 
     public static void RegisterWindow(Sdl2Window window)
