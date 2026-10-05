@@ -1,12 +1,11 @@
-namespace Veldrid.Sdl2
-{
-    public struct DragDropEvent
-    {
-        public string File { get; }
+namespace Veldrid.Sdl2;
 
-        public DragDropEvent(string file)
-        {
-            File = file;
-        }
+public struct DragDropEvent
+{
+    public string File { get; }
+
+    public DragDropEvent(string file)
+    {
+        File = file;
     }
 }
