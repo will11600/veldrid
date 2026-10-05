@@ -15,7 +15,7 @@ namespace Veldrid.Sdl2;
 
 public unsafe class Sdl2Window
 {
-    private readonly List<SDL_Event> _events = new();
+    private readonly List<SDL_Event> _events = [];
     private IntPtr _window;
     internal uint WindowID { get; private set; }
     private bool _exists;
@@ -979,9 +979,9 @@ public unsafe class Sdl2Window
 
     private class SimpleInputSnapshot : InputSnapshot
     {
-        public List<KeyEvent> KeyEventsList { get; private set; } = new List<KeyEvent>();
-        public List<MouseEvent> MouseEventsList { get; private set; } = new List<MouseEvent>();
-        public List<char> KeyCharPressesList { get; private set; } = new List<char>();
+        public List<KeyEvent> KeyEventsList { get; private set; } = [];
+        public List<MouseEvent> MouseEventsList { get; private set; } = [];
+        public List<char> KeyCharPressesList { get; private set; } = [];
 
         public IReadOnlyList<KeyEvent> KeyEvents => KeyEventsList;
 

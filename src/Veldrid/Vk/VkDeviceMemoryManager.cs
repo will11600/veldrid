@@ -16,8 +16,8 @@ internal unsafe class VkDeviceMemoryManager : IDisposable
     private readonly ulong _bufferImageGranularity;
     private readonly object _lock = new();
     private ulong _totalAllocatedBytes;
-    private readonly Dictionary<uint, ChunkAllocatorSet> _allocatorsByMemoryTypeUnmapped = new();
-    private readonly Dictionary<uint, ChunkAllocatorSet> _allocatorsByMemoryType = new();
+    private readonly Dictionary<uint, ChunkAllocatorSet> _allocatorsByMemoryTypeUnmapped = [];
+    private readonly Dictionary<uint, ChunkAllocatorSet> _allocatorsByMemoryType = [];
 
     private readonly vkGetBufferMemoryRequirements2_t _getBufferMemoryRequirements2;
     private readonly vkGetImageMemoryRequirements2_t _getImageMemoryRequirements2;
@@ -195,7 +195,7 @@ internal unsafe class VkDeviceMemoryManager : IDisposable
         private readonly VkDevice _device;
         private readonly uint _memoryTypeIndex;
         private readonly bool _persistentMapped;
-        private readonly List<ChunkAllocator> _allocators = new();
+        private readonly List<ChunkAllocator> _allocators = [];
 
         public ChunkAllocatorSet(VkDevice device, uint memoryTypeIndex, bool persistentMapped)
         {
@@ -246,7 +246,7 @@ internal unsafe class VkDeviceMemoryManager : IDisposable
         private readonly VkDevice _device;
         private readonly uint _memoryTypeIndex;
         private readonly bool _persistentMapped;
-        private readonly List<VkMemoryBlock> _freeBlocks = new();
+        private readonly List<VkMemoryBlock> _freeBlocks = [];
         private readonly VkDeviceMemory _memory;
         private readonly void* _mappedPtr;
 
@@ -395,7 +395,7 @@ internal unsafe class VkDeviceMemoryManager : IDisposable
         }
 
 #if DEBUG
-        private List<VkMemoryBlock> _allocatedBlocks = new();
+        private List<VkMemoryBlock> _allocatedBlocks = [];
 
         private void CheckAllocatedBlock(VkMemoryBlock block)
         {

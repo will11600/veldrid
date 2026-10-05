@@ -12,7 +12,7 @@ internal class OculusMirrorTexture : IDisposable
 
     private readonly OculusContext _context;
     private readonly Dictionary<OutputDescription, TextureBlitter> _blitters
-        = new();
+        = [];
 
     private (uint width, uint height, MirrorTextureEyeSource source) _texProperties;
     private ovrMirrorTexture _ovrMirrorTex;

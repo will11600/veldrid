@@ -14,7 +14,7 @@ internal unsafe class MTLGraphicsDevice : GraphicsDevice
 {
     private static readonly Lazy<bool> s_isSupported = new(GetIsSupported);
     private static readonly Dictionary<IntPtr, MTLGraphicsDevice> s_aotRegisteredBlocks
-        = new();
+        = [];
 
     private readonly MTLDevice _device;
     private readonly string _deviceName;
@@ -25,11 +25,11 @@ internal unsafe class MTLGraphicsDevice : GraphicsDevice
     private BackendInfoMetal _metalInfo;
 
     private readonly object _submittedCommandsLock = new();
-    private readonly Dictionary<MTLCommandBuffer, MTLFence> _submittedCBs = new();
+    private readonly Dictionary<MTLCommandBuffer, MTLFence> _submittedCBs = [];
     private MTLCommandBuffer _latestSubmittedCB;
 
     private readonly object _resetEventsLock = new();
-    private readonly List<ManualResetEvent[]> _resetEvents = new();
+    private readonly List<ManualResetEvent[]> _resetEvents = [];
 
     private const string UnalignedBufferCopyPipelineMacOSName = "MTL_UnalignedBufferCopy_macOS";
     private const string UnalignedBufferCopyPipelineiOSName = "MTL_UnalignedBufferCopy_iOS";

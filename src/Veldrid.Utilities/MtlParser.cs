@@ -72,7 +72,7 @@ public class MtlParser
     {
         private static readonly char[] s_whitespaceChars = new char[] { ' ' };
 
-        private readonly List<MaterialDefinition> _definitions = new();
+        private readonly List<MaterialDefinition> _definitions = [];
         private MaterialDefinition _currentDefinition;
 
         private int _currentLine;

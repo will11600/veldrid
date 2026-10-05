@@ -374,7 +374,7 @@ public unsafe class RenderDoc
     {
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
-            List<string> paths = new();
+            List<string> paths = [];
             string programFiles = Environment.GetEnvironmentVariable("ProgramFiles");
             if (programFiles != null)
             {

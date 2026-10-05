@@ -12,7 +12,7 @@ internal static class Sdl2WindowRegistry
 {
     public static readonly object Lock = new();
     private static readonly Dictionary<uint, Sdl2Window> _eventsByWindowID
-        = new();
+        = [];
     private static bool _firstInit;
 
     public static void RegisterWindow(Sdl2Window window)

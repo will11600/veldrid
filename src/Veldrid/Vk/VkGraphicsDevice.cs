@@ -61,15 +61,15 @@ internal unsafe class VkGraphicsDevice : GraphicsDevice
     private const uint MaxStagingBufferSize = 512;
 
     private readonly object _stagingResourcesLock = new();
-    private readonly List<VkTexture> _availableStagingTextures = new();
-    private readonly List<VkBuffer> _availableStagingBuffers = new();
+    private readonly List<VkTexture> _availableStagingTextures = [];
+    private readonly List<VkBuffer> _availableStagingBuffers = [];
 
     private readonly Dictionary<VkCommandBuffer, VkTexture> _submittedStagingTextures
-        = new();
+        = [];
     private readonly Dictionary<VkCommandBuffer, VkBuffer> _submittedStagingBuffers
-        = new();
+        = [];
     private readonly Dictionary<VkCommandBuffer, SharedCommandPool> _submittedSharedCommandPools
-        = new();
+        = [];
 
     public override string DeviceName => _deviceName;
 
@@ -115,10 +115,10 @@ internal unsafe class VkGraphicsDevice : GraphicsDevice
 
     private readonly object _submittedFencesLock = new();
     private readonly ConcurrentQueue<Vulkan.VkFence> _availableSubmissionFences = new();
-    private readonly List<FenceSubmissionInfo> _submittedFences = new();
+    private readonly List<FenceSubmissionInfo> _submittedFences = [];
     private readonly VkSwapchain _mainSwapchain;
 
-    private readonly List<FixedUtf8String> _surfaceExtensions = new();
+    private readonly List<FixedUtf8String> _surfaceExtensions = [];
 
     public VkGraphicsDevice(GraphicsDeviceOptions options, SwapchainDescription? scDesc)
         : this(options, scDesc, new VulkanDeviceOptions()) { }
@@ -542,7 +542,7 @@ internal unsafe class VkGraphicsDevice : GraphicsDevice
         }
 
         string[] requestedInstanceExtensions = options.InstanceExtensions ?? Array.Empty<string>();
-        List<FixedUtf8String> tempStrings = new();
+        List<FixedUtf8String> tempStrings = [];
         foreach (string requiredExt in requestedInstanceExtensions)
         {
             if (!availableInstanceExtensions.Contains(requiredExt))
@@ -715,7 +715,7 @@ internal unsafe class VkGraphicsDevice : GraphicsDevice
     {
         GetQueueFamilyIndices(surface);
 
-        HashSet<uint> familyIndices = new() { _graphicsQueueIndex, _presentQueueIndex };
+        HashSet<uint> familyIndices = [_graphicsQueueIndex, _presentQueueIndex];
         VkDeviceQueueCreateInfo* queueCreateInfos = stackalloc VkDeviceQueueCreateInfo[familyIndices.Count];
         uint queueCreateInfosCount = (uint)familyIndices.Count;
 

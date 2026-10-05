@@ -15,8 +15,8 @@ internal class OpenGLCommandList : CommandList
     internal OpenGLGraphicsDevice Device => _gd;
 
     private readonly object _lock = new();
-    private readonly List<OpenGLCommandEntryList> _availableLists = new();
-    private readonly List<OpenGLCommandEntryList> _submittedLists = new();
+    private readonly List<OpenGLCommandEntryList> _availableLists = [];
+    private readonly List<OpenGLCommandEntryList> _submittedLists = [];
 
     public override string Name { get; set; }
 

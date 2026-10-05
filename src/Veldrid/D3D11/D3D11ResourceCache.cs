@@ -12,16 +12,16 @@ internal class D3D11ResourceCache : IDisposable
     private readonly object _lock = new();
 
     private readonly Dictionary<BlendStateDescription, ID3D11BlendState> _blendStates
-        = new();
+        = [];
 
     private readonly Dictionary<DepthStencilStateDescription, ID3D11DepthStencilState> _depthStencilStates
-        = new();
+        = [];
 
     private readonly Dictionary<D3D11RasterizerStateCacheKey, ID3D11RasterizerState> _rasterizerStates
-        = new();
+        = [];
 
     private readonly Dictionary<InputLayoutCacheKey, ID3D11InputLayout> _inputLayouts
-        = new();
+        = [];
 
     public D3D11ResourceCache(ID3D11Device device)
     {

@@ -207,12 +207,12 @@ internal unsafe class OpenGLPipeline : Pipeline, OpenGLDeferredResource
             OpenGLResourceLayout glSetLayout = Util.AssertSubtype<ResourceLayout, OpenGLResourceLayout>(setLayout);
             ResourceLayoutElementDescription[] resources = glSetLayout.Elements;
 
-            Dictionary<uint, OpenGLUniformBinding> uniformBindings = new();
-            Dictionary<uint, OpenGLTextureBindingSlotInfo> textureBindings = new();
-            Dictionary<uint, OpenGLSamplerBindingSlotInfo> samplerBindings = new();
-            Dictionary<uint, OpenGLShaderStorageBinding> storageBufferBindings = new();
+            Dictionary<uint, OpenGLUniformBinding> uniformBindings = [];
+            Dictionary<uint, OpenGLTextureBindingSlotInfo> textureBindings = [];
+            Dictionary<uint, OpenGLSamplerBindingSlotInfo> samplerBindings = [];
+            Dictionary<uint, OpenGLShaderStorageBinding> storageBufferBindings = [];
 
-            List<int> samplerTrackedRelativeTextureIndices = new();
+            List<int> samplerTrackedRelativeTextureIndices = [];
             for (uint i = 0; i < resources.Length; i++)
             {
                 ResourceLayoutElementDescription resource = resources[i];

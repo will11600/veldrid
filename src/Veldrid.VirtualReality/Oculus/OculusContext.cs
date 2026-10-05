@@ -293,7 +293,7 @@ internal unsafe class OculusContext : VRContext
 
     private static string[] GetStringArray(byte[] utf8Data)
     {
-        List<string> ret = new();
+        List<string> ret = [];
         int start = 0;
         for (int i = 0; i < utf8Data.Length; i++)
         {

@@ -37,11 +37,11 @@ public class ImGuiRenderer : IDisposable
 
     // Image trackers
     private readonly Dictionary<TextureView, ResourceSetInfo> _setsByView
-        = new();
+        = [];
     private readonly Dictionary<Texture, TextureView> _autoViewsByTexture
-        = new();
-    private readonly Dictionary<IntPtr, ResourceSetInfo> _viewsById = new();
-    private readonly List<IDisposable> _ownedResources = new();
+        = [];
+    private readonly Dictionary<IntPtr, ResourceSetInfo> _viewsById = [];
+    private readonly List<IDisposable> _ownedResources = [];
     private int _lastAssignedID = 100;
     private bool _frameBegun;
 

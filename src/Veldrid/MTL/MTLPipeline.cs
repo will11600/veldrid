@@ -283,7 +283,7 @@ internal class MTLPipeline : Pipeline
 
     private void AddSpecializedFunction(MTLFunction function)
     {
-        if (_specializedFunctions == null) { _specializedFunctions = new List<MTLFunction>(); }
+        if (_specializedFunctions == null) { _specializedFunctions = []; }
         _specializedFunctions.Add(function);
     }
 

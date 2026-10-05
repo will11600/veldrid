@@ -32,10 +32,10 @@ internal class D3D11GraphicsDevice : GraphicsDevice
 
     private readonly object _mappedResourceLock = new();
     private readonly Dictionary<MappedResourceCacheKey, MappedResourceInfo> _mappedResources
-        = new();
+        = [];
 
     private readonly object _stagingResourcesLock = new();
-    private readonly List<D3D11Buffer> _availableStagingBuffers = new();
+    private readonly List<D3D11Buffer> _availableStagingBuffers = [];
 
     public override string DeviceName => _deviceName;
 
@@ -612,7 +612,7 @@ internal class D3D11GraphicsDevice : GraphicsDevice
     }
 
     private readonly object _resetEventsLock = new();
-    private readonly List<ManualResetEvent[]> _resetEvents = new();
+    private readonly List<ManualResetEvent[]> _resetEvents = [];
 
     private ManualResetEvent[] GetResetEventArray(int length)
     {

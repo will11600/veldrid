@@ -72,16 +72,16 @@ public class ObjParser
 
     private class ParseContext
     {
-        private List<Vector3> _positions = new();
-        private List<Vector3> _normals = new();
-        private List<Vector2> _texCoords = new();
+        private List<Vector3> _positions = [];
+        private List<Vector3> _normals = [];
+        private List<Vector2> _texCoords = [];
 
-        private List<ObjFile.MeshGroup> _groups = new();
+        private List<ObjFile.MeshGroup> _groups = [];
 
         private string _currentGroupName;
         private string _currentMaterial;
         private int _currentSmoothingGroup;
-        private List<ObjFile.Face> _currentGroupFaces = new();
+        private List<ObjFile.Face> _currentGroupFaces = [];
 
         private int _currentLine;
         private string _currentLineText;
@@ -386,9 +386,9 @@ public class ObjFile
     /// <returns>A new <see cref="ConstructedMeshInfo"/>.</returns>
     public ConstructedMeshInfo GetMesh(MeshGroup group)
     {
-        Dictionary<FaceVertex, ushort> vertexMap = new();
+        Dictionary<FaceVertex, ushort> vertexMap = [];
         ushort[] indices = new ushort[group.Faces.Length * 3];
-        List<VertexPositionNormalTexture> vertices = new();
+        List<VertexPositionNormalTexture> vertices = [];
 
         for (int i = 0; i < group.Faces.Length; i++)
         {

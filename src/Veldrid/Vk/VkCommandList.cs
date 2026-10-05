@@ -25,7 +25,7 @@ internal unsafe class VkCommandList : CommandList
     private VkClearValue[] _clearValues = Array.Empty<VkClearValue>();
     private bool[] _validColorClearValues = Array.Empty<bool>();
     private VkClearValue? _depthClearValue;
-    private readonly List<VkTexture> _preDrawSampledImages = new();
+    private readonly List<VkTexture> _preDrawSampledImages = [];
 
     // Graphics State
     private VkFramebufferBase _currentFramebuffer;
@@ -45,13 +45,13 @@ internal unsafe class VkCommandList : CommandList
 
     private readonly object _commandBufferListLock = new();
     private readonly Queue<VkCommandBuffer> _availableCommandBuffers = new();
-    private readonly List<VkCommandBuffer> _submittedCommandBuffers = new();
+    private readonly List<VkCommandBuffer> _submittedCommandBuffers = [];
 
     private StagingResourceInfo _currentStagingInfo;
     private readonly object _stagingLock = new();
-    private readonly Dictionary<VkCommandBuffer, StagingResourceInfo> _submittedStagingInfos = new();
-    private readonly List<StagingResourceInfo> _availableStagingInfos = new();
-    private readonly List<VkBuffer> _availableStagingBuffers = new();
+    private readonly Dictionary<VkCommandBuffer, StagingResourceInfo> _submittedStagingInfos = [];
+    private readonly List<StagingResourceInfo> _availableStagingInfos = [];
+    private readonly List<VkBuffer> _availableStagingBuffers = [];
 
     public VkCommandPool CommandPool => _pool;
     public VkCommandBuffer CommandBuffer => _cb;
@@ -1315,8 +1315,8 @@ internal unsafe class VkCommandList : CommandList
 
     private class StagingResourceInfo
     {
-        public List<VkBuffer> BuffersUsed { get; } = new List<VkBuffer>();
-        public HashSet<ResourceRefCount> Resources { get; } = new HashSet<ResourceRefCount>();
+        public List<VkBuffer> BuffersUsed { get; } = [];
+        public HashSet<ResourceRefCount> Resources { get; } = [];
         public void Clear()
         {
             BuffersUsed.Clear();

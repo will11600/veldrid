@@ -17,8 +17,8 @@ internal class D3D11Buffer : DeviceBuffer
     private readonly ID3D11Device _device;
     private readonly ID3D11Buffer _buffer;
     private readonly Lock _accessViewLock = new();
-    private readonly Dictionary<OffsetSizePair, ID3D11ShaderResourceView> _srvs = new();
-    private readonly Dictionary<OffsetSizePair, ID3D11UnorderedAccessView> _uavs = new();
+    private readonly Dictionary<OffsetSizePair, ID3D11ShaderResourceView> _srvs = [];
+    private readonly Dictionary<OffsetSizePair, ID3D11UnorderedAccessView> _uavs = [];
     private readonly uint _structureByteStride;
     private readonly bool _rawBuffer;
     private string _name;

@@ -18,7 +18,7 @@ public class Octree<T>
 {
     private OctreeNode<T> _currentRoot;
 
-    private List<OctreeItem<T>> _pendingMoveStage = new();
+    private List<OctreeItem<T>> _pendingMoveStage = [];
 
     public Octree(BoundingBox boundingBox, int maxChildren)
     {
@@ -145,7 +145,7 @@ public class Octree<T>
 [DebuggerDisplay("{DebuggerDisplayString,nq}")]
 public class OctreeNode<T>
 {
-    private readonly List<OctreeItem<T>> _items = new();
+    private readonly List<OctreeItem<T>> _items = [];
     private readonly OctreeNodeCache _nodeCache;
     private OctreeNode<T>[] _children = Array.Empty<OctreeNode<T>>();
     private BoundingBox _bounds;

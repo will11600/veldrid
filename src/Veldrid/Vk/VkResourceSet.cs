@@ -10,15 +10,15 @@ internal unsafe class VkResourceSet : ResourceSet
     private readonly VkGraphicsDevice _gd;
     private readonly DescriptorResourceCounts _descriptorCounts;
     private readonly DescriptorAllocationToken _descriptorAllocationToken;
-    private readonly List<ResourceRefCount> _refCounts = new();
+    private readonly List<ResourceRefCount> _refCounts = [];
     private bool _destroyed;
     private string _name;
 
     public VkDescriptorSet DescriptorSet => _descriptorAllocationToken.Set;
 
-    private readonly List<VkTexture> _sampledTextures = new();
+    private readonly List<VkTexture> _sampledTextures = [];
     public List<VkTexture> SampledTextures => _sampledTextures;
-    private readonly List<VkTexture> _storageImages = new();
+    private readonly List<VkTexture> _storageImages = [];
     public List<VkTexture> StorageTextures => _storageImages;
 
     public ResourceRefCount RefCount { get; }

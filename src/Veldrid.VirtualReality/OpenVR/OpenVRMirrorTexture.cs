@@ -6,9 +6,9 @@ namespace Veldrid.VirtualReality.OpenVR;
 
 internal class OpenVRMirrorTexture : IDisposable
 {
-    private readonly List<IDisposable> _disposables = new();
+    private readonly List<IDisposable> _disposables = [];
     private readonly Dictionary<OutputDescription, TextureBlitter> _blitters
-        = new();
+        = [];
 
     private OpenVRContext _context;
     private ResourceSet _leftSet;

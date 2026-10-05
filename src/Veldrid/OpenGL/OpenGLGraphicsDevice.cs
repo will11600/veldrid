@@ -53,15 +53,15 @@ internal unsafe class OpenGLGraphicsDevice : GraphicsDevice
     private ExecutionThread _executionThread;
     private readonly object _commandListDisposalLock = new();
     private readonly Dictionary<OpenGLCommandList, int> _submittedCommandListCounts
-        = new();
-    private readonly HashSet<OpenGLCommandList> _commandListsToDispose = new();
+        = [];
+    private readonly HashSet<OpenGLCommandList> _commandListsToDispose = [];
 
     private readonly object _mappedResourceLock = new();
     private readonly Dictionary<MappedResourceCacheKey, MappedResourceInfoWithStaging> _mappedResources
-        = new();
+        = [];
 
     private readonly object _resetEventsLock = new();
-    private readonly List<ManualResetEvent[]> _resetEvents = new();
+    private readonly List<ManualResetEvent[]> _resetEvents = [];
     private Swapchain _mainSwapchain;
 
     private bool _syncToVBlank;
@@ -159,7 +159,7 @@ internal unsafe class OpenGLGraphicsDevice : GraphicsDevice
         glGetIntegerv(GetPName.NumExtensions, &extensionCount);
         CheckLastError();
 
-        HashSet<string> extensions = new();
+        HashSet<string> extensions = [];
         for (uint i = 0; i < extensionCount; i++)
         {
             byte* extensionNamePtr = glGetStringi(StringNameIndexed.Extensions, i);
@@ -1147,7 +1147,7 @@ internal unsafe class OpenGLGraphicsDevice : GraphicsDevice
         private readonly Action<IntPtr> _makeCurrent;
         private readonly IntPtr _context;
         private bool _terminated;
-        private readonly List<Exception> _exceptions = new();
+        private readonly List<Exception> _exceptions = [];
         private readonly object _exceptionsLock = new();
 
         public ExecutionThread(

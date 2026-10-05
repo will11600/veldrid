@@ -9,11 +9,11 @@ namespace Veldrid.OpenGL.NoAllocEntryList;
 internal unsafe class OpenGLNoAllocCommandEntryList : OpenGLCommandEntryList, IDisposable
 {
     private readonly StagingMemoryPool _memoryPool;
-    private readonly List<EntryStorageBlock> _blocks = new();
+    private readonly List<EntryStorageBlock> _blocks = [];
     private EntryStorageBlock _currentBlock;
     private uint _totalEntries;
-    private readonly List<object> _resourceList = new();
-    private readonly List<StagingBlock> _stagingBlocks = new();
+    private readonly List<object> _resourceList = [];
+    private readonly List<StagingBlock> _stagingBlocks = [];
 
     // Entry IDs
     private const byte BeginEntryID = 1;

@@ -12,7 +12,7 @@ namespace Veldrid;
 public abstract class GraphicsDevice : IDisposable
 {
     private readonly object _deferredDisposalLock = new();
-    private readonly List<IDisposable> _disposables = new();
+    private readonly List<IDisposable> _disposables = [];
     private Sampler _aniso4xSampler;
 
     internal GraphicsDevice() { }

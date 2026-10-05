@@ -73,18 +73,18 @@ internal class D3D11CommandList : CommandList
     private readonly D3D11Sampler[] _vertexBoundSamplers = new D3D11Sampler[MaxCachedSamplers];
     private readonly D3D11Sampler[] _fragmentBoundSamplers = new D3D11Sampler[MaxCachedSamplers];
 
-    private readonly Dictionary<Texture, List<BoundTextureInfo>> _boundSRVs = new();
-    private readonly Dictionary<Texture, List<BoundTextureInfo>> _boundUAVs = new();
+    private readonly Dictionary<Texture, List<BoundTextureInfo>> _boundSRVs = [];
+    private readonly Dictionary<Texture, List<BoundTextureInfo>> _boundUAVs = [];
     private readonly List<List<BoundTextureInfo>> _boundTextureInfoPool = new(20);
 
     private const int MaxUAVs = 8;
     private readonly List<(DeviceBuffer, int)> _boundComputeUAVBuffers = new(MaxUAVs);
     private readonly List<(DeviceBuffer, int)> _boundOMUAVBuffers = new(MaxUAVs);
 
-    private readonly List<D3D11Buffer> _availableStagingBuffers = new();
-    private readonly List<D3D11Buffer> _submittedStagingBuffers = new();
+    private readonly List<D3D11Buffer> _availableStagingBuffers = [];
+    private readonly List<D3D11Buffer> _submittedStagingBuffers = [];
 
-    private readonly List<D3D11Swapchain> _referencedSwapchains = new();
+    private readonly List<D3D11Swapchain> _referencedSwapchains = [];
 
     public D3D11CommandList(D3D11GraphicsDevice gd, ref CommandListDescription description)
         : base(ref description, gd.Features, gd.UniformBufferMinOffsetAlignment, gd.StructuredBufferMinOffsetAlignment)
@@ -814,7 +814,7 @@ internal class D3D11CommandList : CommandList
             return ret;
         }
 
-        return new List<BoundTextureInfo>();
+        return [];
     }
 
     private void BindStorageBufferView(D3D11BufferRange range, int slot, ShaderStages stages)

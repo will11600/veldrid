@@ -14,7 +14,7 @@ internal unsafe class VkFramebuffer : VkFramebufferBase
     private readonly VkRenderPass _renderPassNoClearLoad;
     private readonly VkRenderPass _renderPassNoClear;
     private readonly VkRenderPass _renderPassClear;
-    private readonly List<VkImageView> _attachmentViews = new();
+    private readonly List<VkImageView> _attachmentViews = [];
     private bool _destroyed;
     private string _name;
 
