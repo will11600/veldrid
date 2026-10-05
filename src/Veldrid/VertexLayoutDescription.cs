@@ -97,6 +97,13 @@ public struct VertexLayoutDescription : IEquatable<VertexLayoutDescription>
     /// <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
     public override int GetHashCode()
     {
-        return HashHelper.Combine(Stride.GetHashCode(), HashHelper.Array(Elements), InstanceStepRate.GetHashCode());
+        HashCode hashCode = new();
+        hashCode.Add(Stride);
+        foreach (VertexElementDescription element in Elements)
+        {
+            hashCode.Add(element);
+        }
+        hashCode.Add(InstanceStepRate);
+        return hashCode.ToHashCode();   
     }
 }

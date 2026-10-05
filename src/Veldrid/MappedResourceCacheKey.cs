@@ -21,6 +21,6 @@ internal struct MappedResourceCacheKey : IEquatable<MappedResourceCacheKey>
 
     public override int GetHashCode()
     {
-        return HashHelper.Combine(Resource.GetHashCode(), Subresource.GetHashCode());
+        return HashCode.Combine(Resource, Subresource);
     }
 }

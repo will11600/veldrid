@@ -109,10 +109,14 @@ public struct BlendStateDescription : IEquatable<BlendStateDescription>
     /// <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
     public override int GetHashCode()
     {
-        return HashHelper.Combine(
-            BlendFactor.GetHashCode(),
-            AlphaToCoverageEnabled.GetHashCode(),
-            HashHelper.Array(AttachmentStates));
+        HashCode hashCode = new();
+        hashCode.Add(BlendFactor);
+        hashCode.Add(AlphaToCoverageEnabled);
+        foreach (BlendAttachmentDescription attachmentState in AttachmentStates)
+        {
+            hashCode.Add(attachmentState);
+        }
+        return hashCode.ToHashCode();
     }
 
     internal BlendStateDescription ShallowClone()

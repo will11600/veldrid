@@ -86,9 +86,13 @@ public struct OutputDescription : IEquatable<OutputDescription>
     /// <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
     public override int GetHashCode()
     {
-        return HashHelper.Combine(
-            DepthAttachment.GetHashCode(),
-            HashHelper.Array(ColorAttachments),
-            (int)SampleCount);
+        HashCode hashCode = new();
+        hashCode.Add(DepthAttachment);
+        foreach (OutputAttachmentDescription colorAttachment in ColorAttachments)
+        {
+            hashCode.Add(colorAttachment);
+        }
+        hashCode.Add((int)SampleCount);
+        return hashCode.ToHashCode();
     }
 }

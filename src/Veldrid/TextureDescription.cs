@@ -284,15 +284,16 @@ public struct TextureDescription : IEquatable<TextureDescription>
     /// <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
     public override int GetHashCode()
     {
-        return HashHelper.Combine(
-            Width.GetHashCode(),
-            Height.GetHashCode(),
-            Depth.GetHashCode(),
-            MipLevels.GetHashCode(),
-            ArrayLayers.GetHashCode(),
-            (int)Format,
-            (int)Usage,
-            (int)Type,
-            (int)SampleCount);
+        HashCode hashCode = new();
+        hashCode.Add(Width);
+        hashCode.Add(Height);
+        hashCode.Add(Depth);
+        hashCode.Add(MipLevels);
+        hashCode.Add(ArrayLayers);
+        hashCode.Add((int)Format);
+        hashCode.Add((int)Usage);
+        hashCode.Add((int)Type);
+        hashCode.Add((int)SampleCount);
+        return hashCode.ToHashCode();
     }
 }

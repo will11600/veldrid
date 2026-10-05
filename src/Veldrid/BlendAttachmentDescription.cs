@@ -214,9 +214,9 @@ public struct BlendAttachmentDescription : IEquatable<BlendAttachmentDescription
     /// <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
     public override int GetHashCode()
     {
-        return HashHelper.Combine(
-            BlendEnabled.GetHashCode(),
-            ColorWriteMask.GetHashCode(),
+        return HashCode.Combine(
+            BlendEnabled,
+            ColorWriteMask,
             (int)SourceColorFactor,
             (int)DestinationColorFactor,
             (int)ColorFunction,

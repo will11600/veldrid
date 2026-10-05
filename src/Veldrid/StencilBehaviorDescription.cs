@@ -59,6 +59,6 @@ public struct StencilBehaviorDescription : IEquatable<StencilBehaviorDescription
     /// <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
     public override int GetHashCode()
     {
-        return HashHelper.Combine((int)Fail, (int)Pass, (int)DepthFail, (int)Comparison);
+        return HashCode.Combine((int)Fail, (int)Pass, (int)DepthFail, (int)Comparison);
     }
 }

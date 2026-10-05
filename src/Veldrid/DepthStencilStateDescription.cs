@@ -201,15 +201,16 @@ public struct DepthStencilStateDescription : IEquatable<DepthStencilStateDescrip
     /// <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
     public override int GetHashCode()
     {
-        return HashHelper.Combine(
-            DepthTestEnabled.GetHashCode(),
-            DepthWriteEnabled.GetHashCode(),
-            (int)DepthComparison,
-            StencilTestEnabled.GetHashCode(),
-            StencilFront.GetHashCode(),
-            StencilBack.GetHashCode(),
-            StencilReadMask.GetHashCode(),
-            StencilWriteMask.GetHashCode(),
-            StencilReference.GetHashCode());
+        HashCode hashCode = new();
+        hashCode.Add(DepthTestEnabled);
+        hashCode.Add(DepthWriteEnabled);
+        hashCode.Add((int)DepthComparison);
+        hashCode.Add(StencilTestEnabled);
+        hashCode.Add(StencilFront);
+        hashCode.Add(StencilBack);
+        hashCode.Add(StencilReadMask);
+        hashCode.Add(StencilWriteMask);
+        hashCode.Add(StencilReference);
+        return hashCode.ToHashCode();
     }
 }

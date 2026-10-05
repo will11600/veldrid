@@ -108,11 +108,11 @@ public struct RasterizerStateDescription : IEquatable<RasterizerStateDescription
     /// <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
     public override int GetHashCode()
     {
-        return HashHelper.Combine(
+        return HashCode.Combine(
             (int)CullMode,
             (int)FillMode,
             (int)FrontFace,
-            DepthClipEnabled.GetHashCode(),
-            ScissorTestEnabled.GetHashCode());
+            DepthClipEnabled,
+            ScissorTestEnabled);
     }
 }

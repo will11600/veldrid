@@ -92,8 +92,8 @@ public struct VertexElementDescription : IEquatable<VertexElementDescription>
     /// <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
     public override int GetHashCode()
     {
-        return HashHelper.Combine(
-            Name.GetHashCode(),
+        return HashCode.Combine(
+            Name,
             (int)Format,
             (int)Semantic,
             (int)Offset);

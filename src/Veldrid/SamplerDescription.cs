@@ -185,16 +185,17 @@ public struct SamplerDescription : IEquatable<SamplerDescription>
     /// <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
     public override int GetHashCode()
     {
-        return HashHelper.Combine(
-            (int)AddressModeU,
-            (int)AddressModeV,
-            (int)AddressModeW,
-            (int)Filter,
-            ComparisonKind.GetHashCode(),
-            MaximumAnisotropy.GetHashCode(),
-            MinimumLod.GetHashCode(),
-            MaximumLod.GetHashCode(),
-            LodBias.GetHashCode(),
-            (int)BorderColor);
+        HashCode hashCode = new();
+        hashCode.Add((int)AddressModeU);
+        hashCode.Add((int)AddressModeV);
+        hashCode.Add((int)AddressModeW);
+        hashCode.Add((int)Filter);
+        hashCode.Add(ComparisonKind.GetValueOrDefault());
+        hashCode.Add(MaximumAnisotropy);
+        hashCode.Add(MinimumLod);
+        hashCode.Add(MaximumLod);
+        hashCode.Add(LodBias);
+        hashCode.Add((int)BorderColor);
+        return hashCode.ToHashCode();
     }
 }

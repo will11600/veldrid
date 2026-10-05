@@ -73,6 +73,12 @@ public struct FramebufferDescription : IEquatable<FramebufferDescription>
     /// <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
     public override int GetHashCode()
     {
-        return HashHelper.Combine(DepthTarget.GetHashCode(), HashHelper.Array(ColorTargets));
+        HashCode hashCode = new();
+        hashCode.Add(DepthTarget);
+        foreach (FramebufferAttachmentDescription colorTarget in ColorTargets)
+        {
+            hashCode.Add(colorTarget);
+        }
+        return hashCode.ToHashCode();
     }
 }

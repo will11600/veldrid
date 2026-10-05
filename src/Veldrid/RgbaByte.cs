@@ -125,7 +125,7 @@ public struct RgbaByte : IEquatable<RgbaByte>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public override int GetHashCode()
     {
-        return HashHelper.Combine(R.GetHashCode(), G.GetHashCode(), B.GetHashCode(), A.GetHashCode());
+        return HashCode.Combine(R, G, B, A);
     }
 
     /// <summary>

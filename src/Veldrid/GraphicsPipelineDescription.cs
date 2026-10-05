@@ -172,14 +172,18 @@ public struct GraphicsPipelineDescription : IEquatable<GraphicsPipelineDescripti
     /// <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
     public override int GetHashCode()
     {
-        return HashHelper.Combine(
-            BlendState.GetHashCode(),
-            DepthStencilState.GetHashCode(),
-            RasterizerState.GetHashCode(),
-            (int)PrimitiveTopology,
-            ShaderSet.GetHashCode(),
-            HashHelper.Array(ResourceLayouts),
-            ResourceBindingModel.GetHashCode(),
-            Outputs.GetHashCode());
+        HashCode hashCode = new();
+        hashCode.Add(BlendState);
+        hashCode.Add(DepthStencilState);
+        hashCode.Add(RasterizerState);
+        hashCode.Add((int)PrimitiveTopology);
+        hashCode.Add(ShaderSet);
+        foreach (ResourceLayout layout in ResourceLayouts)
+        {
+            hashCode.Add(layout);
+        }
+        hashCode.Add(ResourceBindingModel);
+        hashCode.Add(Outputs);
+        return hashCode.ToHashCode();
     }
 }

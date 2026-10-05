@@ -112,12 +112,12 @@ public struct SwapchainDescription : IEquatable<SwapchainDescription>
     /// <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
     public override int GetHashCode()
     {
-        return HashHelper.Combine(
-            Source.GetHashCode(),
-            Width.GetHashCode(),
-            Height.GetHashCode(),
-            DepthFormat.GetHashCode(),
-            SyncToVerticalBlank.GetHashCode(),
-            ColorSrgb.GetHashCode());
+        return HashCode.Combine(
+            Source,
+            Width,
+            Height,
+            DepthFormat,
+            SyncToVerticalBlank,
+            ColorSrgb);
     }
 }

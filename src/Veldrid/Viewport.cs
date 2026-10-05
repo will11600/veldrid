@@ -69,12 +69,12 @@ public struct Viewport : IEquatable<Viewport>
     /// <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
     public override int GetHashCode()
     {
-        return HashHelper.Combine(
-            X.GetHashCode(),
-            Y.GetHashCode(),
-            Width.GetHashCode(),
-            Height.GetHashCode(),
-            MinDepth.GetHashCode(),
-            MaxDepth.GetHashCode());
+        return HashCode.Combine(
+            X,
+            Y,
+            Width,
+            Height,
+            MinDepth,
+            MaxDepth);
     }
 }

@@ -82,9 +82,19 @@ public struct ShaderSetDescription : IEquatable<ShaderSetDescription>
     /// <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
     public override int GetHashCode()
     {
-        return HashHelper.Combine(
-            HashHelper.Array(VertexLayouts),
-            HashHelper.Array(Shaders),
-            HashHelper.Array(Specializations));
+        HashCode hashCode = new();
+        foreach (VertexLayoutDescription vertexLayout in VertexLayouts)
+        {
+            hashCode.Add(vertexLayout);
+        }
+        foreach (Shader shader in Shaders)
+        {
+            hashCode.Add(shader);
+        }
+        foreach (SpecializationConstant specialization in Specializations)
+        {
+            hashCode.Add(specialization);
+        }
+        return hashCode.ToHashCode();
     }
 }

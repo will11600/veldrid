@@ -82,10 +82,10 @@ public struct ShaderDescription : IEquatable<ShaderDescription>
     /// <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
     public override int GetHashCode()
     {
-        return HashHelper.Combine(
+        return HashCode.Combine(
             (int)Stage,
-            ShaderBytes.GetHashCode(),
-            EntryPoint.GetHashCode(),
-            Debug.GetHashCode());
+            ShaderBytes,
+            EntryPoint,
+            Debug);
     }
 }

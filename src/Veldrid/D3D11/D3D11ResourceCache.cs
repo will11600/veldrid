@@ -299,7 +299,12 @@ internal class D3D11ResourceCache : IDisposable
 
         public override int GetHashCode()
         {
-            return HashHelper.Array(VertexLayouts);
+            HashCode hashCode = new();
+            foreach (VertexLayoutDescription layout in VertexLayouts)
+            {
+                hashCode.Add(layout);
+            }
+            return hashCode.ToHashCode();
         }
     }
 
@@ -322,7 +327,7 @@ internal class D3D11ResourceCache : IDisposable
 
         public override int GetHashCode()
         {
-            return HashHelper.Combine(VeldridDescription.GetHashCode(), Multisampled.GetHashCode());
+            return HashCode.Combine(VeldridDescription, Multisampled);
         }
     }
 }

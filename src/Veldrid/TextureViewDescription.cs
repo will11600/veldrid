@@ -133,12 +133,12 @@ public struct TextureViewDescription : IEquatable<TextureViewDescription>
     /// <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
     public override int GetHashCode()
     {
-        return HashHelper.Combine(
-            Target.GetHashCode(),
-            BaseMipLevel.GetHashCode(),
-            MipLevels.GetHashCode(),
-            BaseArrayLayer.GetHashCode(),
-            ArrayLayers.GetHashCode(),
-            Format?.GetHashCode() ?? 0);
+        return HashCode.Combine(
+            Target,
+            BaseMipLevel,
+            MipLevels,
+            BaseArrayLayer,
+            ArrayLayers,
+            Format);
     }
 }

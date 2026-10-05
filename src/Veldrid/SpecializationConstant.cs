@@ -115,6 +115,6 @@ public struct SpecializationConstant : IEquatable<SpecializationConstant>
     /// <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
     public override int GetHashCode()
     {
-        return HashHelper.Combine(ID.GetHashCode(), (int)Type, Data.GetHashCode());
+        return HashCode.Combine(ID, (int)Type, Data);
     }
 }

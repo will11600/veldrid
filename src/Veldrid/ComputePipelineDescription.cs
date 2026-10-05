@@ -131,11 +131,15 @@ public struct ComputePipelineDescription : IEquatable<ComputePipelineDescription
     /// <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
     public override int GetHashCode()
     {
-        return HashHelper.Combine(
-            ComputeShader.GetHashCode(),
-            HashHelper.Array(ResourceLayouts),
-            ThreadGroupSizeX.GetHashCode(),
-            ThreadGroupSizeY.GetHashCode(),
-            ThreadGroupSizeZ.GetHashCode());
+        HashCode hashCode = new();
+        hashCode.Add(ComputeShader);
+        foreach (ResourceLayout resourceLayout in ResourceLayouts)
+        {
+            hashCode.Add(resourceLayout);
+        }
+        hashCode.Add(ThreadGroupSizeX);
+        hashCode.Add(ThreadGroupSizeY);
+        hashCode.Add(ThreadGroupSizeZ);
+        return hashCode.ToHashCode();
     }
 }

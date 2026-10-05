@@ -196,6 +196,6 @@ internal class D3D11Buffer : DeviceBuffer
         }
 
         public bool Equals(OffsetSizePair other) => Offset.Equals(other.Offset) && Size.Equals(other.Size);
-        public override int GetHashCode() => HashHelper.Combine(Offset.GetHashCode(), Size.GetHashCode());
+        public override int GetHashCode() => HashCode.Combine(Offset, Size);
     }
 }

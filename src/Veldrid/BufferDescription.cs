@@ -92,10 +92,10 @@ public struct BufferDescription : IEquatable<BufferDescription>
     /// <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
     public override int GetHashCode()
     {
-        return HashHelper.Combine(
-            SizeInBytes.GetHashCode(),
+        return HashCode.Combine(
+            SizeInBytes,
             (int)Usage,
-            StructureByteStride.GetHashCode(),
-            RawBuffer.GetHashCode());
+            StructureByteStride,
+            RawBuffer);
     }
 }

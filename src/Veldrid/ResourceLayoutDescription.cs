@@ -39,6 +39,11 @@ public struct ResourceLayoutDescription : IEquatable<ResourceLayoutDescription>
     /// <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
     public override int GetHashCode()
     {
-        return HashHelper.Array(Elements);
+        HashCode hashCode = new();
+        foreach (ResourceLayoutElementDescription element in Elements)
+        {
+            hashCode.Add(element);
+        }
+        return hashCode.ToHashCode();
     }
 }

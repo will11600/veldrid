@@ -45,6 +45,12 @@ public struct ResourceSetDescription : IEquatable<ResourceSetDescription>
     /// <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
     public override int GetHashCode()
     {
-        return HashHelper.Combine(Layout.GetHashCode(), HashHelper.Array(BoundResources));
+        HashCode hashCode = new();
+        hashCode.Add(Layout);
+        foreach (BindableResource resource in BoundResources)
+        {
+            hashCode.Add(resource);
+        }
+        return hashCode.ToHashCode();
     }
 }

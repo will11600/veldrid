@@ -73,7 +73,7 @@ public struct ResourceLayoutElementDescription : IEquatable<ResourceLayoutElemen
     /// <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
     public override int GetHashCode()
     {
-        return HashHelper.Combine(Name.GetHashCode(), (int)Kind, (int)Stages, (int)Options);
+        return HashCode.Combine(Name, (int)Kind, (int)Stages, (int)Options);
     }
 }
 

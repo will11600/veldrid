@@ -50,7 +50,7 @@ public struct Rectangle : IEquatable<Rectangle>
 
     public override int GetHashCode()
     {
-        return HashHelper.Combine(X.GetHashCode(), HashHelper.Combine(Y.GetHashCode(), HashHelper.Combine(Width.GetHashCode(), Height.GetHashCode())));
+        return HashCode.Combine(X, Y, Width, Height);
     }
 
     public static bool operator ==(Rectangle left, Rectangle right) => left.Equals(right);
